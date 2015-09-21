@@ -7,6 +7,7 @@ use Role::Tiny;
 
 # VERSION
 
+# TODO: replace with Mojo::DOM's native ->val, once that's released
 sub __val {
   my $dom = shift;
 
