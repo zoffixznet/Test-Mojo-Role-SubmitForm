@@ -1,9 +1,8 @@
 package Test::Mojo::Role::SubmitForm;
 
 use Mojo::Base -base;
-use Encode;
-use Carp qw/croak/;
 use Role::Tiny;
+use Carp qw/croak/;
 
 # VERSION
 
