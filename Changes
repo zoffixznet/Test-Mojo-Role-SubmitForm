@@ -1,5 +1,9 @@
 Revision history for Test-Mojo-Role-SubmitForm
 
+1.002001  2015-09-22
+    - Added debug mode through MOJO_SUBMITFORM_DEBUG
+    - Do not submit 'undef' values
+
 1.001002  2015-09-21
     - Handle exotic name=""s
 

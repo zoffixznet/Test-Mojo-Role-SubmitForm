@@ -48,12 +48,25 @@ sub click_ok {
         );
     }
 
+    my %form = (
+        $self->_get_controls($el),
+        %$extra_params,
+    );
+    delete @form{grep !defined $form{$_}, keys %form};
+
+    if ( $ENV{MOJO_SUBMITFORM_DEBUG} ) {
+        warn "\n########## SUBMITTING FORM ##########\n";
+        require Data::Dumper;
+        local $Data::Dumper::Indent = 1;
+        local $Data::Dumper::Varname = 'FORM';
+        local $Data::Dumper::Sortkeys = 1;
+        warn Data::Dumper::Dumper(\%form);
+        warn "##########    END FORM     ##########\n\n";
+    }
+
     my $tx = $self->ua->build_tx(
         $el->attr('method')||'GET' => $el->attr('action')
-            => form => {
-                $self->_get_controls($el),
-                %$extra_params,
-            },
+            => form => \%form,
     );
 
     $self->request_ok( $tx );
@@ -85,7 +98,7 @@ __END__
 
 =encoding utf8
 
-=for stopwords Znet Zoffix app  Subrefs subrefs
+=for stopwords Znet Zoffix app  Subrefs subrefs ENV
 
 =head1 NAME
 
@@ -148,6 +161,41 @@ the keys are C<name="">s of controls to override and values can be either
 plain scalars (use arrayrefs for multiple values) or subrefs. Subrefs
 will be evaluated and their first C<@_> element will be the current value
 of the form control.
+
+=head1 DEBUGGING / ENV VARS
+
+To see what form data is being submitted, set C<MOJO_SUBMITFORM_DEBUG>
+environmental variable to a true value:
+
+    MOJO_SUBMITFORM_DEBUG=1 prove -vlr t/02-app.t
+
+Sample output:
+
+    ok 55 - GET /
+    ok 56 - 200 OK
+
+    ########## SUBMITTING FORM ##########
+    $FORM1 = {
+      'desc-1' => 'Description 1',
+      'desc-2' => 'Description 2',
+      'month' => [
+        '8'
+      ],
+      'num-1' => '001-001',
+      'num-2' => '001-002',
+      'price-1' => 43,
+      'price-2' => 44,
+      'qty-1' => '11',
+      'qty-2' => '12',
+      'um-1' => 'box',
+      'um-2' => 'box',
+      'year' => [
+        '2015'
+      ]
+    };
+    ##########    END FORM     ##########
+
+    [Tue Sep 22 10:03:02 2015] [debug] POST "/save"
 
 =head1 SEE ALSO
 
