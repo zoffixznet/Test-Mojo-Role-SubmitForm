@@ -1,5 +1,6 @@
 #!perl
 
+use utf8;
 use FindBin;
 require "$FindBin::Bin/Test/MyApp.pm";
 
@@ -14,6 +15,8 @@ my %form_one = (
     f => [ 'I', 'J' ],
     l => 'L',
     m => 'M',
+    '$"bar' => 42,
+    q{©☺♥} => 24,
 );
 
 { # Plain clicking
@@ -59,13 +62,17 @@ my %form_one = (
             a => '42',
             f => [ 1..3 ],
             l => sub { my $r = shift; [ @$r, 42 ] },
-            z => sub { shift . 'offix'}
+            e => sub { shift . 'offix'},
+            '$"bar' => sub { 5 },
+            '©☺♥' => sub { 55 },
         })->status_is(200)->json_is({
             %form_one,
             a => '42',
             f => [ 1..3 ],
             l => [ 'L', 42],
-            z => 'Zoffix',
+            e => 'Eoffix',
+            '$"bar' => 5,
+            '©☺♥' => 55,
         })
 }
 

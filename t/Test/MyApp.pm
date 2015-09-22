@@ -1,4 +1,5 @@
 
+use utf8;
 use Mojolicious::Lite;
 get '/' => 'index';
 any '/test' => sub {
@@ -18,6 +19,7 @@ __DATA__
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8">
+<title>42</title>
 
 <form action="/test" method="POST" id="one">
   <p>Test</p>
@@ -27,9 +29,11 @@ __DATA__
   <input type="radio" name="d" value="D">
   <input type="radio" checked name="e" value="E">
   <input type="radio" name="e" value="Z">
-  <select name="f">
+  <input type="hidden" name="$&quot;bar" value="42">
+  <input type="hidden" name="©☺♥" value="24">
+  <select name="f" multiple>
     <option value="F">G</option>
-    <optgroup>
+    <optgroup label="Options">
       <option>H</option>
       <option selected>I</option>
     </optgroup>
@@ -41,11 +45,11 @@ __DATA__
   <button name="o" value="O">No!</button>
   <input type="button" name="s" value="S">
   <input type="submit" name="p" value="P">
-  <input type="image" src="" name="z" value="Z">
+  <input type="image" src="/" name="z" alt="z">
 </form>
 <form action="/test" id="two"><input type="submit" name="q" value="Q"></form>
 <form action="/test" id="three"><input type="button" name="r" value="R"></form>
 <form action="/test" id="four">
-    <input type="image" src="" name="z" value="Z">
+    <input type="image" src="/" name="z" alt="Z">
 </form>
 <form action="/test" id="five"></form>

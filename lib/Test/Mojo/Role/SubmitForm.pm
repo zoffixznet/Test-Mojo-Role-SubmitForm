@@ -42,8 +42,9 @@ sub click_ok {
 
     for ( sort keys %$extra_params ) {
         next unless ref $extra_params->{$_} eq 'CODE';
+        ( my $name = $_ ) =~ s/"/\\"/g;
         $extra_params->{$_} = $extra_params->{$_}->(
-            __val( $el->at("[name=$_]") )
+            __val( $el->at(qq{[name="$name"]}) )
         );
     }
 
@@ -66,7 +67,7 @@ sub _get_controls {
     map +( $_->attr('name') => __val($_) ),
         $el->find(
             'input:not([type=button]):not([type=submit]):not([type=image])'
-            . ':not([type=image]):not([type=checkbox]):not([type=radio]),'
+            . ':not([type=checkbox]):not([type=radio]),'
             . '[type=checkbox][checked], [type=radio][checked],'
             . 'select, textarea'
         )->each;
