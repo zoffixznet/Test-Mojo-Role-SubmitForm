@@ -15,7 +15,7 @@ Test::Mojo::Role::SubmitForm - Test::Mojo role that allows to submit forms
     # Submit a form without clicking any buttons: pass selector to the form
     $t->get_ok('/')->status_is(200)->click_ok('form#one')->status_is(200);
 
-    # Click a particular submit
+    # Click a particular button
     $t->get_ok('/')->status_is(200)->click_ok('[type=submit]')->status_is(200);
 
     # Submit a form while overriding form data

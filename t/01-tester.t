@@ -61,7 +61,7 @@ my %form_one = (
         ->click_ok('form#one', {
             a => '42',
             f => [ 1..3 ],
-            l => sub { my $r = shift; [ @$r, 42 ] },
+            l => sub { my $r = shift; [ $r, 42 ] },
             e => sub { shift . 'offix'},
             '$"bar' => sub { 5 },
             '©☺♥' => sub { 55 },

@@ -6,22 +6,6 @@ use Carp qw/croak/;
 
 # VERSION
 
-# TODO: replace with Mojo::DOM's native ->val, once that's released
-sub __val {
-  my $dom = shift;
-
-  # "option"
-  my $tag = $dom->tag;
-  return $dom->{value} // $dom->text if $tag eq 'option';
-
-  # "select"
-  return $dom->find('option[selected]')->map(sub{__val($_)})->to_array
-    if $tag eq 'select';
-
-  # "textarea", "input" or "button"
-  return $tag eq 'textarea' ? $dom->text : $dom->{value};
-}
-
 sub click_ok {
     my ( $self, $selector, $extra_params ) = @_;
     $extra_params ||= {};
@@ -44,7 +28,7 @@ sub click_ok {
         next unless ref $extra_params->{$_} eq 'CODE';
         ( my $name = $_ ) =~ s/"/\\"/g;
         $extra_params->{$_} = $extra_params->{$_}->(
-            __val( $el->at(qq{[name="$name"]}) )
+            $el->at(qq{[name="$name"]})->val
         );
     }
 
@@ -77,7 +61,7 @@ sub click_ok {
 sub _get_controls {
     my ( $self, $el ) = @_;
 
-    map +( $_->attr('name') => __val($_) ),
+    map +( $_->attr('name') => $_->val ),
         $el->find(
             'input:not([type=button]):not([type=submit]):not([type=image])'
             . ':not([type=checkbox]):not([type=radio]),'
