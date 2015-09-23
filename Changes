@@ -1,5 +1,9 @@
 Revision history for Test-Mojo-Role-SubmitForm
 
+1.001005  2015-09-23
+    - Fixed incorrect handling of multiple controls with same name (#4)
+    - Micro optimizations
+
 1.001004  2015-09-22
     - Switch to use Mojo::DOM's native ->val
 

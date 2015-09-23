@@ -23,6 +23,7 @@ __DATA__
 
 <form action="/test" method="POST" id="one">
   <p>Test</p>
+  <!-- The usual stuff -->
   <input type="text" name="a" value="A">
   <input type="checkbox" checked name="b" value="B">
   <input type="checkbox" name="c" value="C">
@@ -46,6 +47,25 @@ __DATA__
   <input type="button" name="s" value="S">
   <input type="submit" name="p" value="P">
   <input type="image" src="/" name="z" alt="z">
+
+  <!-- Multiple controls with same name -->
+  <input type="text" name="mult_a" value="A">
+  <input type="text" name="mult_a" value="B">
+  <input type="checkbox" checked name="mult_b" value="C">
+  <input type="checkbox" checked name="mult_b" value="D">
+  <input type="checkbox" checked name="mult_b" value="E">
+
+  <select name="mult_f" multiple>
+    <option value="F">G</option>
+    <optgroup label="Options">
+      <option>H</option>
+      <option selected>I</option>
+    </optgroup>
+    <option value="J" selected>K</option>
+  </select>
+  <select name="mult_f"><option selected>N</option></select>
+  <textarea name="mult_m">M</textarea>
+  <textarea name="mult_m">Z</textarea>
 </form>
 <form action="/test" id="two"><input type="submit" name="q" value="Q"></form>
 <form action="/test" id="three"><input type="button" name="r" value="R"></form>

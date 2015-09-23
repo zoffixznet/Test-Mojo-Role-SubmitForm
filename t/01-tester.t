@@ -17,6 +17,11 @@ my %form_one = (
     m => 'M',
     '$"bar' => 42,
     q{©☺♥} => 24,
+
+    mult_a => [qw/A B/],
+    mult_b => [qw/C D E/],
+    mult_f => [qw/I J N/],
+    mult_m => [qw/M Z/],
 );
 
 { # Plain clicking
@@ -65,6 +70,7 @@ my %form_one = (
             e => sub { shift . 'offix'},
             '$"bar' => sub { 5 },
             '©☺♥' => sub { 55 },
+            mult_m => [qw/FOO BAR/],
         })->status_is(200)->json_is({
             %form_one,
             a => '42',
@@ -73,6 +79,7 @@ my %form_one = (
             e => 'Eoffix',
             '$"bar' => 5,
             '©☺♥' => 55,
+            mult_m => [qw/FOO BAR/],
         })
 }
 

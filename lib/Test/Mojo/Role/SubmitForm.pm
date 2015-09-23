@@ -1,6 +1,7 @@
 package Test::Mojo::Role::SubmitForm;
 
 use Mojo::Base -base;
+use List::AllUtils qw/uniq/;
 use Role::Tiny;
 use Carp qw/croak/;
 
@@ -57,15 +58,23 @@ sub click_ok {
 }
 
 sub _get_controls {
-    my ( $self, $el ) = @_;
+    my ( $self, $form ) = @_;
 
-    map +( $_->{name} => $_->val ),
-        $el->find(
-            'input:not([type=button]):not([type=submit]):not([type=image])'
-            . ':not([type=checkbox]):not([type=radio]),'
-            . '[type=checkbox][checked], [type=radio][checked],'
-            . 'select, textarea'
-        )->each;
+    my @els = $form->find(
+        'input:not([type=button]):not([type=submit]):not([type=image])'
+        . ':not([type=checkbox]):not([type=radio]),'
+        . '[type=checkbox]:checked, [type=radio]:checked,'
+        . 'select, textarea'
+    )->each;
+
+    my %controls;
+    for ( @els ) {
+        defined( my $val = $_->val ) or next;
+        push @{ $controls{$_->{name}} }, ref $val ? @$val : $val;
+    }
+    $#$_ or $_= $_->[0] for values %controls; # chage 1-el arrayrefs to strings
+
+    return %controls;
 }
 
 q|
