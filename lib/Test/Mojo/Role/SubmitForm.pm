@@ -157,31 +157,48 @@ environmental variable to a true value:
 
 Sample output:
 
-    ok 55 - GET /
-    ok 56 - 200 OK
+    ok 36 - GET /
+    ok 37 - 200 OK
 
     ########## SUBMITTING FORM ##########
-    $FORM1 = {
-      'desc-1' => 'Description 1',
-      'desc-2' => 'Description 2',
-      'month' => [
-        '8'
+    {
+      "\$\"bar" => 5,
+      "a" => 42,
+      "b" => "B",
+      "e" => "Eoffix",
+      "f" => [
+        1,
+        2,
+        3
       ],
-      'num-1' => '001-001',
-      'num-2' => '001-002',
-      'price-1' => 43,
-      'price-2' => 44,
-      'qty-1' => '11',
-      'qty-2' => '12',
-      'um-1' => 'box',
-      'um-2' => 'box',
-      'year' => [
-        '2015'
-      ]
-    };
+      "l" => [
+        "L",
+        42
+      ],
+      "m" => "M",
+      "mult_a" => [
+        "A",
+        "B"
+      ],
+      "mult_b" => [
+        "C",
+        "D",
+        "E"
+      ],
+      "mult_f" => [
+        "I",
+        "J",
+        "N"
+      ],
+      "mult_m" => [
+        "FOO",
+        "BAR"
+      ],
+      "\x{a9}\x{263a}\x{2665}" => 55
+    }
     ##########    END FORM     ##########
 
-    [Tue Sep 22 10:03:02 2015] [debug] POST "/save"
+    [Wed Sep 23 17:34:00 2015] [debug] POST "/test"
 
 =head1 SEE ALSO
 
