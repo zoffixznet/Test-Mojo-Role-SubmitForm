@@ -200,6 +200,12 @@ Sample output:
 
     [Wed Sep 23 17:34:00 2015] [debug] POST "/test"
 
+=head BUGS AND CAVEATS
+
+Note that you cannot override the value of buttons you're clicking on.
+In those cases, simply "click" the form itself, while passing the new values
+for buttons.
+
 =head1 SEE ALSO
 
 L<Test::Mojo>, L<Mojo::DOM>
