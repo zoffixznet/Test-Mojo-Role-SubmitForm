@@ -39,11 +39,8 @@ sub click_ok {
 
     if ( $ENV{MOJO_SUBMITFORM_DEBUG} ) {
         warn "\n########## SUBMITTING FORM ##########\n";
-        require Data::Dumper;
-        local $Data::Dumper::Indent = 1;
-        local $Data::Dumper::Varname = 'FORM';
-        local $Data::Dumper::Sortkeys = 1;
-        warn Data::Dumper::Dumper(\%form);
+        require Mojo::Util;
+        warn Mojo::Util::dumper(\%form);
         warn "##########    END FORM     ##########\n\n";
     }
 
