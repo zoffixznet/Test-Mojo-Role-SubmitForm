@@ -71,6 +71,7 @@ my %form_one = (
             '$"bar' => sub { 5 },
             '©☺♥' => sub { 55 },
             mult_m => [qw/FOO BAR/],
+            mult_a => sub { my $r = shift; [ 1, 2, 3, @$r ] },
         })->status_is(200)->json_is({
             %form_one,
             a => '42',
@@ -80,6 +81,7 @@ my %form_one = (
             '$"bar' => 5,
             '©☺♥' => 55,
             mult_m => [qw/FOO BAR/],
+            mult_a => [1, 2, 3, qw/A B/],
         })
 }
 

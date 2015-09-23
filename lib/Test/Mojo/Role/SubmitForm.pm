@@ -28,7 +28,7 @@ sub click_ok {
         next unless ref $extra_params->{$_} eq 'CODE';
         ( my $name = $_ ) =~ s/"/\\"/g;
         $extra_params->{$_} = $extra_params->{$_}->(
-            $el->at(qq{[name="$name"]})->val
+            $self->_gather_vals( $el->find(qq{[name="$name"]})->each )
         );
     }
 
@@ -52,20 +52,30 @@ sub click_ok {
     $self->request_ok( $tx );
 }
 
+sub _gather_vals {
+    my ( $self, @els ) = @_;
+    my @vals;
+    for ( @els ) {
+        next if $_
+        ->matches('[type=radio]:not(:checked), [type=checkbox]:not(:checked)');
+
+        defined( my $val = $_->val ) or next;
+        push @vals, ref $val ? @$val : $val;
+    }
+    return @vals == 1 ? $vals[0] : @vals ? \@vals : undef;
+}
+
 sub _get_controls {
     my ( $self, $form ) = @_;
 
     my @els = $form->find(
-        'input:not([type=button]):not([type=submit]):not([type=image])'
-        . ':not([type=checkbox]):not([type=radio]),'
-        . '[type=checkbox]:checked, [type=radio]:checked,'
-        . 'select, textarea'
+        'input:not([type=button]):not([type=submit]):not([type=image]),'       . 'select, textarea'
     )->each;
 
     my %controls;
     for ( @els ) {
-        defined( my $val = $_->val ) or next;
-        push @{ $controls{$_->{name}} }, ref $val ? @$val : $val;
+        my $vals = $self->_gather_vals( $_ ) or next;
+        push @{ $controls{$_->{name}} }, ref $vals ? @$vals : $vals;
     }
     $#$_ or $_= $_->[0] for values %controls; # chage 1-el arrayrefs to strings
 
