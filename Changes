@@ -1,9 +1,9 @@
 Revision history for Test-Mojo-Role-SubmitForm
 
-1.002002  2015-09-22
+1.001004  2015-09-22
     - Switch to use Mojo::DOM's native ->val
 
-1.002001  2015-09-22
+1.001003  2015-09-22
     - Added debug mode through MOJO_SUBMITFORM_DEBUG
     - Do not submit 'undef' values
 
