@@ -1,7 +1,6 @@
 package Test::Mojo::Role::SubmitForm;
 
 use Mojo::Base -base;
-use List::AllUtils qw/uniq/;
 use Role::Tiny;
 use Carp qw/croak/;
 
