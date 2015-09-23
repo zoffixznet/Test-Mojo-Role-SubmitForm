@@ -1,5 +1,10 @@
 Revision history for Test-Mojo-Role-SubmitForm
 
+1.001006  2015-09-23
+    - Fixed bug where overrides did not receive correct values for
+        multiple controls with same name (#5)
+    - Minor doc updates (#6)
+
 1.001005  2015-09-23
     - Fixed incorrect handling of multiple controls with same name (#4)
     - Micro optimizations
