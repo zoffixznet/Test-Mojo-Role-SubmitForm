@@ -36,7 +36,6 @@ sub click_ok {
         $self->_get_controls($el),
         %$extra_params,
     );
-    delete @form{grep !defined $form{$_}, keys %form};
 
     if ( $ENV{MOJO_SUBMITFORM_DEBUG} ) {
         warn "\n########## SUBMITTING FORM ##########\n";
