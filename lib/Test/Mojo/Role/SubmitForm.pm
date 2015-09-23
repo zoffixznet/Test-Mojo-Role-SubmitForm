@@ -82,7 +82,7 @@ __END__
 
 =encoding utf8
 
-=for stopwords Znet Zoffix app  Subrefs subrefs ENV
+=for stopwords Znet Zoffix app  Subrefs subrefs ENV VARS
 
 =head1 NAME
 
