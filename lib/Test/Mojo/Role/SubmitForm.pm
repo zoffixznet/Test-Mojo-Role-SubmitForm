@@ -13,12 +13,12 @@ sub click_ok {
     my $el = $self->tx->res->dom->at($selector)
         or croak "Did not find element matching selector $selector";
     unless ( $el->tag eq 'form' ) {
-        if ( $el->attr('type') eq 'image' ) {
-            $extra_params->{ $el->attr('name') . '.x' } = 1;
-            $extra_params->{ $el->attr('name') . '.y' } = 1;
+        if ( $el->{type} eq 'image' ) {
+            $extra_params->{ $el->{name} . '.x' } = 1;
+            $extra_params->{ $el->{name} . '.y' } = 1;
         }
         else {
-            $extra_params->{ $el->attr('name') } = $el->attr('value');
+            $extra_params->{ $el->{name} } = $el->val;
         }
 
         $el = $el->ancestors('form')->first;
@@ -49,19 +49,17 @@ sub click_ok {
     }
 
     my $tx = $self->ua->build_tx(
-        $el->attr('method')||'GET' => $el->attr('action')
+        $el->{method}||'GET' => $el->{action}
             => form => \%form,
     );
 
     $self->request_ok( $tx );
-
-    $self;
 }
 
 sub _get_controls {
     my ( $self, $el ) = @_;
 
-    map +( $_->attr('name') => $_->val ),
+    map +( $_->{name} => $_->val ),
         $el->find(
             'input:not([type=button]):not([type=submit]):not([type=image])'
             . ':not([type=checkbox]):not([type=radio]),'
