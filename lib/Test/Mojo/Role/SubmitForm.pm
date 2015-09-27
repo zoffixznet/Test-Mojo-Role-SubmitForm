@@ -187,7 +187,7 @@ Sample output:
 
     [Wed Sep 23 17:34:00 2015] [debug] POST "/test"
 
-=head BUGS AND CAVEATS
+=head1 CAVEATS
 
 Note that you cannot override the value of buttons you're clicking on.
 In those cases, simply "click" the form itself, while passing the new values
