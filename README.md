@@ -73,31 +73,31 @@ environmental variable to a true value:
 
 Sample output:
 
-    ok 55 - GET /
-    ok 56 - 200 OK
+    ok 36 - GET /
+    ok 37 - 200 OK
 
     ########## SUBMITTING FORM ##########
-    $FORM1 = {
-      'desc-1' => 'Description 1',
-      'desc-2' => 'Description 2',
-      'month' => [
-        '8'
+    {
+      "\$\"bar" => 5,
+      "a" => 42,
+      "b" => "B",
+      "e" => "Zoffix",
+      "mult_b" => [
+        "C",
+        "D",
+        "E"
       ],
-      'num-1' => '001-001',
-      'num-2' => '001-002',
-      'price-1' => 43,
-      'price-2' => 44,
-      'qty-1' => '11',
-      'qty-2' => '12',
-      'um-1' => 'box',
-      'um-2' => 'box',
-      'year' => [
-        '2015'
-      ]
-    };
+      "\x{a9}\x{263a}\x{2665}" => 55
+    }
     ##########    END FORM     ##########
 
-    [Tue Sep 22 10:03:02 2015] [debug] POST "/save"
+    [Wed Sep 23 17:34:00 2015] [debug] POST "/test"
+
+# CAVEATS
+
+Note that you cannot override the value of buttons you're clicking on.
+In those cases, simply "click" the form itself, while passing the new values
+for buttons.
 
 # SEE ALSO
 
