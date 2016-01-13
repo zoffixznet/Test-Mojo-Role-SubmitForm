@@ -1,5 +1,9 @@
 Revision history for Test-Mojo-Role-SubmitForm
 
+1.001008  2016-01-13
+    - Bump Mojolicious version prereq, to avoid broken
+      version 6.37
+
 1.001007  2015-09-27
     - Fixed POD directive error
 
