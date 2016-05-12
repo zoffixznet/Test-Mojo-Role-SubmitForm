@@ -45,7 +45,7 @@ sub click_ok {
     }
 
     my $tx = $self->ua->build_tx(
-        $el->{method}||'GET' => $el->{action}
+        $el->{method}||'GET' => defined $el->{action} && $el->{action} ne '' ? $el->{action} : $self->tx->req->url
             => form => \%form,
     );
 

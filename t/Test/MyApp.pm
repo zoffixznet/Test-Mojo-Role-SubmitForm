@@ -8,6 +8,13 @@ any '/test' => sub {
     $c->render( json => $c->req->params->to_hash );
 };
 
+get '/samepage' => 'samepage';
+post '/samepage' => sub {
+    my $c = shift;
+
+    $c->render( json => $c->req->params->to_hash );
+};
+
 app->start;
 
 1;
@@ -73,3 +80,16 @@ __DATA__
     <input type="image" src="/" name="z" alt="Z">
 </form>
 <form action="/test" id="five"></form>
+
+@@samepage.html.ep
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>47</title>
+
+<form method="POST" id="one">
+  <input type="text" name="a" value="A">
+</form>
+<form method="POST" action="" id="two">
+  <input type="text" name="a" value="A">
+</form>
