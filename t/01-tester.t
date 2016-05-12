@@ -59,6 +59,11 @@ my %form_one = (
         'Die when not matched a selector';
     like $@, qr/\QDid not find element matching selector form#two [name=z]\E/,
         'Error message is sane';
+
+    $t->get_ok('/samepage')->status_is(200)
+        ->click_ok('form#one')->status_is(200)->json_is({ a => A});
+    $t->get_ok('/samepage')->status_is(200)
+        ->click_ok('form#two')->status_is(200)->json_is({ a => A});
 }
 
 { # Override form data
