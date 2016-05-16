@@ -1,9 +1,12 @@
 Revision history for Test-Mojo-Role-SubmitForm
 
-1.002001  2016-05-12
+1.002002  2016-05-16
     [Changes by PLICEASE]
         - Allow forms with missing/empty action="";
             will use current page to submit to
+
+1.002001 2016-05-12
+    - upload failed due to PAUSE error
 
 1.001008  2016-01-13
     - Bump Mojolicious version prereq, to avoid broken
