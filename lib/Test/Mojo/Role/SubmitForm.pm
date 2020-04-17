@@ -11,7 +11,8 @@ sub click_ok {
     $extra_params ||= {};
 
     my $el = $self->tx->res->dom->at($selector)
-        or croak "Did not find element matching selector $selector";
+        or croak 'Test::Mojo::Role::SubmitForm::click_ok()'
+        . " Did not find element matching selector $selector";
     unless ( $el->tag eq 'form' ) {
         if ( $el->{type} eq 'image' ) {
             $extra_params->{ $el->{name} . '.x' } = 1;
