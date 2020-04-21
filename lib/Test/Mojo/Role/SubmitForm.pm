@@ -41,6 +41,9 @@ sub click_ok {
         $self->_get_controls($el),
         %$extra_params,
     );
+    for (keys %form) {
+        delete $form{$_} unless defined $form{$_}
+    }
 
     if ( $ENV{MOJO_SUBMITFORM_DEBUG} ) {
         warn "\n########## SUBMITTING FORM ##########\n";
@@ -151,6 +154,7 @@ You have all the methods provided by L<Test::Mojo>, plus these:
     $t->click_ok('#button', {
         input1        => '42',
         select1       => [ 1..3 ],
+        remove_me     => undef,
         other_select  => sub { my $r = shift; [ @$r, 42 ] },
         another_input => sub { shift . 'offix'}
     })
@@ -165,7 +169,7 @@ Specifying a second parameter allows you to override the form control values:
 the keys are C<name="">s of controls to override and values can be either
 plain scalars (use arrayrefs for multiple values) or subrefs. Subrefs
 will be evaluated and their first C<@_> element will be the current value
-of the form control.
+of the form control. Use C<undef> as value to remove form's parameter.
 
 =head1 DEBUGGING / ENV VARS
 
