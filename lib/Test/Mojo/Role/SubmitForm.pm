@@ -16,12 +16,14 @@ sub click_ok {
             || croak 'Test::Mojo::Role::SubmitForm::click_ok()'
                 . " Did not find element matching selector $selector_or_dom";
     unless ( $el->tag eq 'form' ) {
-        if ( $el->{type} eq 'image' ) {
-            $extra_params->{ $el->{name} . '.x' } = 1;
-            $extra_params->{ $el->{name} . '.y' } = 1;
-        }
-        else {
-            $extra_params->{ $el->{name} } = $el->val;
+        if (length $el->{name}) {
+            if ( ($el->{type}//'') eq 'image' ) {
+                $extra_params->{ $el->{name} . '.x' } = 1;
+                $extra_params->{ $el->{name} . '.y' } = 1;
+            }
+            else {
+                $extra_params->{ $el->{name} } = $el->val;
+            }
         }
 
         $el = $el->ancestors('form')->first;
