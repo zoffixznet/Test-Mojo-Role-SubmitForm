@@ -82,7 +82,7 @@ sub _get_controls {
 
     my %controls;
     for ( @els ) {
-        my $vals = $self->_gather_vals( $_ ) or next;
+        defined(my $vals = $self->_gather_vals( $_ )) or next;
         push @{ $controls{$_->{name}} }, ref $vals ? @$vals : $vals;
     }
     $#$_ or $_= $_->[0] for values %controls; # chage 1-el arrayrefs to strings
