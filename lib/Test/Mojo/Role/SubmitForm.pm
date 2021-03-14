@@ -247,6 +247,8 @@ to C<bug-test-mojo-role-SubmitForm at rt.cpan.org>
 
 =for pod_spiffy start contributors section
 
+    L<Guillaume "guillomovitch" Rousse|https://github.com/guillomovitch>
+
 =for pod_spiffy author PLICEASE
 
 =for pod_spiffy end contributors section
