@@ -35,34 +35,39 @@ Test::Mojo::Role::SubmitForm - Test::Mojo role that allows to submit forms
 
 # DESCRIPTION
 
-A [Test::Mojo](https://metacpan.org/pod/Test::Mojo) role that allows you submit forms, optionally overriding
+A [Test::Mojo](https://metacpan.org/pod/Test%3A%3AMojo) role that allows you submit forms, optionally overriding
 any of the values already present
 
 # METHODS
 
-You have all the methods provided by [Test::Mojo](https://metacpan.org/pod/Test::Mojo), plus these:
+You have all the methods provided by [Test::Mojo](https://metacpan.org/pod/Test%3A%3AMojo), plus these:
 
 ## `click_ok`
 
     $t->click_ok('form');
     $t->click_ok('#button');
 
+    $t->click_ok( $dom->at('form') );
+
     $t->click_ok('#button', {
         input1        => '42',
         select1       => [ 1..3 ],
+        remove_me     => undef,
         other_select  => sub { my $r = shift; [ @$r, 42 ] },
         another_input => sub { shift . 'offix'}
     })
 
-First parameter specifies a CSS selector matching a `<form>` you want to
+First parameter specifies a CSS selector matching or [Mojo::DOM](https://metacpan.org/pod/Mojo%3A%3ADOM) object
+containing `<form>` you want to
 submit or a particular `<button>`, `<input type="submit">`,
-or `<input type="image">` you want to click.
+or `<input type="image">` (contained in a `<form>`)
+you want to click.
 
 Specifying a second parameter allows you to override the form control values:
 the keys are `name=""`s of controls to override and values can be either
 plain scalars (use arrayrefs for multiple values) or subrefs. Subrefs
 will be evaluated and their first `@_` element will be the current value
-of the form control.
+of the form control. Use `undef` as value to remove form's parameter.
 
 # DEBUGGING / ENV VARS
 
@@ -101,7 +106,7 @@ for buttons.
 
 # SEE ALSO
 
-[Test::Mojo](https://metacpan.org/pod/Test::Mojo), [Mojo::DOM](https://metacpan.org/pod/Mojo::DOM)
+[Test::Mojo](https://metacpan.org/pod/Test%3A%3AMojo), [Mojo::DOM](https://metacpan.org/pod/Mojo%3A%3ADOM)
 
 <div>
     <div style="background: url(http://zoffix.com/CPAN/Dist-Zilla-Plugin-Pod-Spiffy/icons/hr.png);height: 18px;"></div>
@@ -155,6 +160,8 @@ to `bug-test-mojo-role-SubmitForm at rt.cpan.org`
 <div>
     <div style="display: table; height: 91px; background: url(http://zoffix.com/CPAN/Dist-Zilla-Plugin-Pod-Spiffy/icons/section-contributors.png) no-repeat left; padding-left: 120px;" ><div style="display: table-cell; vertical-align: middle;">
 </div>
+
+[Guillaume "guillomovitch" Rousse](https://github.com/guillomovitch)
 
 <div>
     <span style="display: inline-block; text-align: center;"> <a href="http://metacpan.org/author/PLICEASE"> <img src="http://www.gravatar.com/avatar/0640fb1c0a5e82f5a777f2306efcac77?d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2F0640fb1c0a5e82f5a777f2306efcac77" alt="PLICEASE" style="display: block; margin: 0 3px 5px 0!important; border: 1px solid #666; border-radius: 3px; "> <span style="color: #333; font-weight: bold;">PLICEASE</span> </a> </span>
