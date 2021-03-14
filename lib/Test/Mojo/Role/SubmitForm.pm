@@ -77,7 +77,9 @@ sub _get_controls {
     my ( $self, $form ) = @_;
 
     my @els = $form->find(
-        'input:not([type=button]):not([type=submit]):not([type=image]),'       . 'select, textarea'
+        'input:not([type=button]):not([type=submit]):not([type=image]):not([disabled]),' .
+        'select:not([disabled]),' .
+        'textarea:not([disabled])'
     )->each;
 
     my %controls;
