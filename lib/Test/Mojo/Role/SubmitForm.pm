@@ -82,6 +82,9 @@ sub _get_controls {
         'textarea:not([disabled])'
     )->each;
 
+    # remove controls defined in templates
+    @els = grep { $_->ancestors('template')->size() == 0 } @els;
+
     my %controls;
     for ( @els ) {
         defined(my $vals = $self->_gather_vals( $_ )) or next;
